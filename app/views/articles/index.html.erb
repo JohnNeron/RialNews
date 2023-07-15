@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center m-3" >
+<h1>Noticias</h1>
+
+</div>
+
+<div class="row d-flex justify-content-center">
+  <% @articles.each do |article| %>
+    <div class="col-12 col-md-6 col-lg-3 mb-3">
+      <div class="card text-bg-dark mb-3">
+        <div class="text-center">
+          <h2 class="card-header"><%= article.name %></h2>
+        </div>
+          <p class="card-text text-center mt-3"><%= article.description %></p>
+       <div>
+       <h3 class="mt-5">Comentarios</h3>
+  <% article.comments.each do |comment| %>
+    <div class="mt-2">
+      <p><%= comment.message %></p>
+      <p>
+        Autor: <%= comment.user.name %>
+        el <%= comment.created_at.strftime("%d/%m/%Y a las %H:%M") %>
+        <% if user_signed_in? %>
+          <% if current_user.role == "admin" %>
+            <%= link_to "Actions", comment, class:"btn btn-secondary btn-sm rounded-pill shadow mb-2"  %>
+          <% end %>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+</div>
+  <div>
+  <%= form_with(model: [article, Comment.new], url: comments_path, local: true) do |form| %>
+    <%= form.hidden_field :article_id, value: article.id %>
+    <div class="field px-3 py-2">
+      <%= form.text_area :message, class: "form-control p-1 text-light bg-opacity-75 border-0 bg-secondary", placeholder: "Escribe tu comentario" %>
+    </div>
+    <div class="text-center">
+      <%= form.submit "Comentar", class:"btn btn-secondary btn-sm rounded-pill shadow mb-2" %>
+    </div>
+  <% end %>
+</div>
+  <div>
+    <%= time_ago_in_words(article.created_at) %>
+    Autor: <%= article.user.name %>
+    <%= link_to "Ver Articulo", article, class:"text-light" %>
+      </div>
+      </div>
+    </div>
+  <% end %>
+  <%= link_to "Nuevo Articulo", new_article_path, class:"btn btn-secondary" %>
+</div>
+
