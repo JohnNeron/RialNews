@@ -1,3 +1,10 @@
+this proyect is deployed by Render: https://rialnews-66ng.onrender.com/
+
+
+Admin user details:
+e-mail: cheemssiel@gmail.com
+password: 111111
+
 # README
 
 This README would normally document whatever steps are necessary to get the
