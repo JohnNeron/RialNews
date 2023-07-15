@@ -2,11 +2,11 @@
 
 <%= render @article %>
 <div>
-  <%= link_to "Back to articles", articles_path %>
+  <%= link_to "Back to articles", articles_path, class:"btn btn-secondary" %>
   <% if user_signed_in? %>
     <% if current_user.id == @article.user_id || current_user.role == "admin" %>
-      <%= link_to "Edit this article", edit_article_path(@article) %>
-      <%= button_to "Destroy this article", @article, method: :delete %>
+      <%= link_to "Edit this article", edit_article_path(@article), class:"btn btn-secondary" %>
+      <%= button_to "Destroy this article", @article, method: :delete, class:"btn btn-secondary" %>
     <% end %>    
   <% end %>
 </div>
